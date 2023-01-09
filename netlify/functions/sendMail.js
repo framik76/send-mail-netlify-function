@@ -25,7 +25,7 @@ exports.handler = async function (event, context) {
             return {
               statusCode: 200, // <-- Important!
               headers,
-              body: 'This was a preflight call!'
+              body: JSON.stringify({ message: 'This was a preflight call!'})
             };
         } else {
             console.log(`Sending mail to ${destination}`);
