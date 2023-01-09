@@ -11,17 +11,16 @@ const transporter = nodemailer.createTransport(
 );
 
 exports.handler = async function (event, context) {
+    const headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, OPTION'
+    };  
     try {
         const { destination, sender, subject, text } =  JSON.parse(event.body);
-        
-        const headers = {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, OPTION'
-        };  
-
         if (event.httpMethod === 'OPTIONS' || event.httpMethod === 'OPTION') {
             // To enable CORS
+            console.log("call OPTION method");
             return {
               statusCode: 200, // <-- Important!
               headers,
