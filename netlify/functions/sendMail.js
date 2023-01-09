@@ -16,9 +16,9 @@ exports.handler = async function (event, context) {
         
         const headers = {
             'Access-Control-Allow-Origin': 'https://casavacanzelavecchiafonte.it/',
-            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE'
-        };
+        };  
 
         if (event.httpMethod === 'OPTIONS') {
             // To enable CORS
@@ -46,6 +46,8 @@ exports.handler = async function (event, context) {
                 console.log(`mail sent: ${info.messageId}`);
                 return {
                     statusCode: 200,
+                    headers,
+                    'Content-Type': 'application/json',
                     body: JSON.stringify({ message: info.messageId }),
                 };
             }
@@ -54,11 +56,15 @@ exports.handler = async function (event, context) {
         if (err.message === 'Bad Request') {
             return {
                 statusCode: 409,
+                headers,
+                'Content-Type': 'application/json',
                 body: JSON.stringify({ message: 'error sending mail: check the payload of the request' }),
             };    
         } else {
             return {
                 statusCode: 500,
+                headers,
+                'Content-Type': 'application/json',
                 body: JSON.stringify({ message: 'error sending mail: ' + err.message }),
             };
         }
