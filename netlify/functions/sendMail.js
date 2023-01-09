@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport(
 
 exports.handler = async function (event, context) {
     const headers = {
-        'Access-Control-Allow-Origin': 'https://casavacanzelavecchiafonte.it/',
+        'Access-Control-Allow-Origin': 'https://casavacanzelavecchiafonte.it',
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, OPTION'
     };  
